@@ -1,0 +1,11 @@
+name = "scansetu-business"
+main = "worker.js"
+compatibility_date = "2026-09-17"
+
+[assets]
+directory = "."
+binding = "ASSETS"
+
+[[kv_namespaces]]
+binding = "SCANSETU_KV"
+id = "REPLACE_WITH_NEW_KV_NAMESPACE_ID"
