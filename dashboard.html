@@ -1,18 +1,229 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ScanSetu Dashboard</title><style>body{font-family:Arial,sans-serif;max-width:720px;margin:auto;padding:24px;background:#f7f1e7;color:#35151b}input,textarea{width:100%;padding:12px;margin:7px 0 15px;border:1px solid #ccc;border-radius:10px}button{padding:12px 18px;border:0;border-radius:10px;background:#35151b;color:white}h1{font-family:Georgia,serif}.card{background:white;padding:18px;border-radius:16px;margin:15px 0}</style></head>
-<body><h1>SCANSETU BUSINESS</h1><p>Retailer Dashboard</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anantaa Creation Dashboard</title>
+
+<style>
+body{
+  font-family:Arial,sans-serif;
+  background:#f5f1e8;
+  margin:0;
+  padding:20px;
+  color:#333;
+}
+.container{
+  max-width:650px;
+  margin:auto;
+}
+.card{
+  background:white;
+  padding:22px;
+  border-radius:16px;
+  margin-bottom:16px;
+  box-shadow:0 4px 18px rgba(0,0,0,.08);
+}
+h1{
+  text-align:center;
+  color:#541d2a;
+}
+label{
+  display:block;
+  font-weight:bold;
+  margin-top:15px;
+}
+input,textarea{
+  width:100%;
+  box-sizing:border-box;
+  padding:12px;
+  margin-top:6px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:15px;
+}
+textarea{
+  min-height:90px;
+}
+button{
+  width:100%;
+  padding:14px;
+  margin-top:18px;
+  border:0;
+  border-radius:9px;
+  background:#541d2a;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+}
+button.secondary{
+  background:#777;
+}
+#msg{
+  text-align:center;
+  font-weight:bold;
+  margin-top:15px;
+}
+#preview{
+  max-width:160px;
+  max-height:100px;
+  display:block;
+  margin:15px auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
 <div class="card">
-<label>Retailer ID / Slug</label><input id="slug" value="demo">
-<label>Admin Password</label><input id="pass" type="password">
-<label>Business Name</label><input id="name" value="Your Business">
-<label>Tagline</label><input id="tagline" value="Connect with us instantly.">
-<label>Links — one per line: Title | URL | Subtitle</label><textarea id="links" rows="9">Google Review | https://example.com | Share your genuine experience
-Instagram | https://instagram.com/ | Follow us
-WhatsApp | https://wa.me/ | Chat with us</textarea>
-<button onclick="save()">SAVE BUSINESS</button> <button onclick="loadData()">LOAD</button>
-<p id="msg"></p></div>
-<script>
-async function loadData(){const s=document.getElementById("slug").value.trim();const r=await fetch("/api/config/"+encodeURIComponent(s));if(!r.ok){msg("No saved business yet.");return}const c=await r.json();name.value=c.siteName||"";tagline.value=c.tagline||"";links.value=(c.links||[]).map(x=>`${x.title||""} | ${x.url||""} | ${x.subtitle||""}`).join("\n");msg("Loaded ✓")}
-async function save(){const s=slug.value.trim();const rows=links.value.split("\n").map(x=>x.split("|").map(y=>y.trim())).filter(x=>x[1]);const body={siteName:name.value.trim(),tagline:tagline.value.trim(),links:rows.map(x=>({title:x[0],url:x[1],subtitle:x[2]||""}))};const r=await fetch("/api/config/"+encodeURIComponent(s),{method:"PUT",headers:{"Content-Type":"application/json","X-Admin-Password":pass.value},body:JSON.stringify(body)});msg(r.ok?"Saved ✓":"Save failed: "+await r.text())}
-function msg(x){document.getElementById("msg").textContent=x}
-</script></body></html>
+<h1>ANANTAA CREATION</h1>
+<p style="text-align:center;">Website Dashboard</p>
+</div>
+
+<div class="card">
+
+<label>Admin Password</label>
+<input id="password" type="password" placeholder="Enter admin password">
+
+<label>Website Name</label>
+<input id="siteName" value="ANANTAA CREATION">
+
+<label>Eyebrow</label>
+<input id="eyebrow" value="SCAN ONCE. CONNECT WITH ANANTAA.">
+
+<label>Subtitle</label>
+<input id="subtitle" value="Your trusted destination for designer ethnic fashion.">
+
+<label>Logo</label>
+<input id="logoFile" type="file" accept="image/*">
+
+<img id="preview" src="anantaa-logo.png" alt="Logo Preview">
+
+</div>
+
+<div class="card">
+
+<h3>Google Review</h3>
+<label>URL</label>
+<input id="reviewUrl" value="https://g.page/r/Ce_5OmgsbRJuEBE/review">
+
+<label>Title</label>
+<input id="reviewTitle" value="Google Review">
+
+<label>Subtitle</label>
+<input id="reviewSubtitle" value="Share your experience with us">
+
+</div>
+
+<div class="card">
+
+<h3>Instagram</h3>
+<label>URL</label>
+<input id="instagramUrl" value="https://www.instagram.com/anantaacreation">
+
+<label>Title</label>
+<input id="instagramTitle" value="Instagram">
+
+<label>Subtitle</label>
+<input id="instagramSubtitle" value="Follow us on Instagram">
+
+</div>
+
+<div class="card">
+
+<h3>Facebook</h3>
+<label>URL</label>
+<input id="facebookUrl" value="https://www.facebook.com/share/1AnLyDaN6P/">
+
+<label>Title</label>
+<input id="facebookTitle" value="Facebook">
+
+<label>Subtitle</label>
+<input id="facebookSubtitle" value="Follow us on Facebook">
+
+</div>
+
+<div class="card">
+
+<h3>Payment</h3>
+
+<label>UPI ID</label>
+<input id="upiId" value="0792593a0019176.bqr@kotak">
+
+<label>Title</label>
+<input id="paymentTitle" value="Pay Now">
+
+<label>Subtitle</label>
+<input id="paymentSubtitle" value="Secure UPI Payment">
+
+</div>
+
+<div class="card">
+
+<h3>Google Maps</h3>
+
+<label>URL</label>
+<input id="mapsUrl" value="https://maps.app.goo.gl/vRKrQ8iVt6MmrEyD6?g_st=awb">
+
+<label>Title</label>
+<input id="mapsTitle" value="Get Directions">
+
+<label>Subtitle</label>
+<input id="mapsSubtitle" value="Find our showroom">
+
+</div>
+
+<div class="card">
+
+<h3>WhatsApp</h3>
+
+<label>URL</label>
+<input id="whatsappUrl" value="https://wa.me/message/KGPXCNP247PJE1">
+
+<label>Title</label>
+<input id="whatsappTitle" value="WhatsApp">
+
+<label>Subtitle</label>
+<input id="whatsappSubtitle" value="Chat with us">
+
+</div>
+
+<div class="card">
+
+<h3>Phone</h3>
+
+<label>Phone Number</label>
+<input id="phoneNumber" value="+919956464164">
+
+<label>Title</label>
+<input id="phoneTitle" value="Call Now">
+
+<label>Subtitle</label>
+<input id="phoneSubtitle" value="Contact Anantaa Creation">
+
+</div>
+
+<div class="card">
+
+<h3>Footer</h3>
+
+<label>Footer Name</label>
+<input id="footerName" value="Anantaa Creation">
+
+<label>Address</label>
+<textarea id="footerAddress">Parth Avenue Commercial Complex, Shop No. FF-2 & FF-3
+Opp. Savita Society, Nr. Naranpura Crossing, Ahmedabad</textarea>
+
+</div>
+
+<div class="card">
+
+<button onclick="loadData()">LOAD CURRENT DATA</button>
+
+<button onclick="saveData()">SAVE CHANGES</button>
+
+<p id="msg"></p>
+
+</div
