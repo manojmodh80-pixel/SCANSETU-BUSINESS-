@@ -5,7 +5,7 @@ export default {
     // API: /api/config
     if (url.pathname === "/api/config") {
       if (request.method === "GET") {
-        const saved = await env.ANANTAA_KV.get("shop:anantaa", "json");
+        const saved = await env.ANANTAA_KV.get("anantaa-config-v1", "json");
         if (saved) return json(saved);
 
         try {
