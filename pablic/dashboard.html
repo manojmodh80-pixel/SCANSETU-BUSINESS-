@@ -3,72 +3,95 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anantaa Creation Dashboard</title>
+<title>ScanSetu Business Dashboard</title>
 
 <style>
+*{box-sizing:border-box}
+
 body{
-  font-family:Arial,sans-serif;
-  background:#f5f1e8;
   margin:0;
-  padding:20px;
-  color:#333;
+  font-family:Arial,sans-serif;
+  background:#f5f5f5;
+  color:#222;
 }
+
 .container{
-  max-width:650px;
-  margin:auto;
+  max-width:900px;
+  margin:30px auto;
+  padding:20px;
 }
+
 .card{
-  background:white;
-  padding:22px;
+  background:#fff;
+  padding:25px;
   border-radius:16px;
-  margin-bottom:16px;
-  box-shadow:0 4px 18px rgba(0,0,0,.08);
+  box-shadow:0 5px 25px rgba(0,0,0,.08);
 }
+
 h1{
-  text-align:center;
-  color:#541d2a;
+  margin-top:0;
 }
+
+h2{
+  margin-top:30px;
+  border-bottom:1px solid #ddd;
+  padding-bottom:8px;
+}
+
 label{
   display:block;
   font-weight:bold;
   margin-top:15px;
+  margin-bottom:6px;
 }
+
 input,textarea{
   width:100%;
-  box-sizing:border-box;
   padding:12px;
-  margin-top:6px;
   border:1px solid #ccc;
   border-radius:8px;
   font-size:15px;
 }
+
 textarea{
-  min-height:90px;
+  min-height:80px;
+  resize:vertical;
 }
+
 button{
-  width:100%;
-  padding:14px;
-  margin-top:18px;
+  margin-top:20px;
+  padding:13px 22px;
   border:0;
-  border-radius:9px;
-  background:#541d2a;
-  color:white;
-  font-size:16px;
+  border-radius:8px;
+  cursor:pointer;
   font-weight:bold;
 }
-button.secondary{
-  background:#777;
+
+.save{
+  background:#111;
+  color:#fff;
 }
-#msg{
-  text-align:center;
-  font-weight:bold;
+
+.load{
+  background:#ddd;
+  margin-left:8px;
+}
+
+.status{
   margin-top:15px;
+  font-weight:bold;
 }
-#preview{
-  max-width:160px;
-  max-height:100px;
-  display:block;
-  margin:15px auto;
+
+.preview{
+  margin-top:20px;
+  padding:15px;
+  background:#f3f3f3;
+  border-radius:10px;
+}
+
+.small{
+  color:#666;
+  font-size:13px;
 }
 </style>
 </head>
@@ -78,152 +101,353 @@ button.secondary{
 <div class="container">
 
 <div class="card">
-<h1>ANANTAA CREATION</h1>
-<p style="text-align:center;">Website Dashboard</p>
-</div>
 
-<div class="card">
+<h1>ScanSetu Business Dashboard</h1>
+
+<p class="small">
+Create and manage a separate smart QR page for every business.
+</p>
+
+<h2>Business Login</h2>
+
+<label>Business ID</label>
+<input id="businessId" placeholder="example: anantaa">
 
 <label>Admin Password</label>
-<input id="password" type="password" placeholder="Enter admin password">
+<input id="password" type="password" placeholder="Admin password">
 
-<label>Website Name</label>
-<input id="siteName" value="ANANTAA CREATION">
+<button class="load" onclick="loadBusiness()">LOAD BUSINESS</button>
 
-<label>Eyebrow</label>
-<input id="eyebrow" value="SCAN ONCE. CONNECT WITH ANANTAA.">
+<h2>Business Information</h2>
 
-<label>Subtitle</label>
-<input id="subtitle" value="Your trusted destination for designer ethnic fashion.">
+<label>Business Name</label>
+<input id="siteName" placeholder="Your Business Name">
 
-<label>Logo</label>
-<input id="logoFile" type="file" accept="image/*">
+<label>Top Heading</label>
+<input id="eyebrow" placeholder="SCAN ONCE. CONNECT WITH US.">
 
-<img id="preview" src="anantaa-logo.png" alt="Logo Preview">
+<label>Business Description</label>
+<input id="subtitle" placeholder="Your business description">
 
-</div>
+<label>Logo URL</label>
+<input id="logo" placeholder="https://...">
 
-<div class="card">
+<h2>Google Review</h2>
 
-<h3>Google Review</h3>
-<label>URL</label>
-<input id="reviewUrl" value="https://g.page/r/Ce_5OmgsbRJuEBE/review">
+<label>Review Button Title</label>
+<input id="reviewTitle" value="GIVE US A GOOGLE REVIEW">
 
-<label>Title</label>
-<input id="reviewTitle" value="Google Review">
+<label>Review Subtitle</label>
+<input id="reviewSubtitle" value="Share your genuine experience">
 
-<label>Subtitle</label>
-<input id="reviewSubtitle" value="Share your experience with us">
+<label>Google Review URL</label>
+<input id="reviewUrl" placeholder="https://g.page/.../review">
 
-</div>
+<h2>Instagram</h2>
 
-<div class="card">
+<label>Instagram Title</label>
+<input id="instagramTitle" value="FOLLOW US ON INSTAGRAM">
 
-<h3>Instagram</h3>
-<label>URL</label>
-<input id="instagramUrl" value="https://www.instagram.com/anantaacreation">
+<label>Instagram Subtitle</label>
+<input id="instagramSubtitle" value="Latest updates • Reels • Offers">
 
-<label>Title</label>
-<input id="instagramTitle" value="Instagram">
+<label>Instagram URL</label>
+<input id="instagramUrl" placeholder="https://instagram.com/...">
 
-<label>Subtitle</label>
-<input id="instagramSubtitle" value="Follow us on Instagram">
+<h2>Facebook</h2>
 
-</div>
+<label>Facebook Title</label>
+<input id="facebookTitle" value="FOLLOW US ON FACEBOOK">
 
-<div class="card">
+<label>Facebook Subtitle</label>
+<input id="facebookSubtitle" value="Stay connected with us">
 
-<h3>Facebook</h3>
-<label>URL</label>
-<input id="facebookUrl" value="https://www.facebook.com/share/1AnLyDaN6P/">
+<label>Facebook URL</label>
+<input id="facebookUrl" placeholder="https://facebook.com/...">
 
-<label>Title</label>
-<input id="facebookTitle" value="Facebook">
+<h2>Payment</h2>
 
-<label>Subtitle</label>
-<input id="facebookSubtitle" value="Follow us on Facebook">
+<label>Payment Title</label>
+<input id="paymentTitle" value="PAY NOW">
 
-</div>
-
-<div class="card">
-
-<h3>Payment</h3>
+<label>Payment Subtitle</label>
+<input id="paymentSubtitle" value="UPI payment">
 
 <label>UPI ID</label>
-<input id="upiId" value="0792593a0019176.bqr@kotak">
+<input id="upiId" placeholder="example@bank">
 
-<label>Title</label>
-<input id="paymentTitle" value="Pay Now">
+<h2>Google Maps</h2>
 
-<label>Subtitle</label>
-<input id="paymentSubtitle" value="Secure UPI Payment">
+<label>Maps Title</label>
+<input id="mapsTitle" value="GET DIRECTIONS">
 
-</div>
+<label>Maps Subtitle</label>
+<input id="mapsSubtitle" value="Find our business">
 
-<div class="card">
+<label>Google Maps URL</label>
+<input id="mapsUrl" placeholder="https://maps.google.com/...">
 
-<h3>Google Maps</h3>
+<h2>WhatsApp</h2>
 
-<label>URL</label>
-<input id="mapsUrl" value="https://maps.app.goo.gl/vRKrQ8iVt6MmrEyD6?g_st=awb">
+<label>WhatsApp Title</label>
+<input id="whatsappTitle" value="CHAT ON WHATSAPP">
 
-<label>Title</label>
-<input id="mapsTitle" value="Get Directions">
+<label>WhatsApp Subtitle</label>
+<input id="whatsappSubtitle" value="Enquiries & details">
 
-<label>Subtitle</label>
-<input id="mapsSubtitle" value="Find our showroom">
+<label>WhatsApp URL</label>
+<input id="whatsappUrl" placeholder="https://wa.me/...">
 
-</div>
+<h2>Phone</h2>
 
-<div class="card">
+<label>Phone Title</label>
+<input id="phoneTitle" value="CALL NOW">
 
-<h3>WhatsApp</h3>
-
-<label>URL</label>
-<input id="whatsappUrl" value="https://wa.me/message/KGPXCNP247PJE1">
-
-<label>Title</label>
-<input id="whatsappTitle" value="WhatsApp">
-
-<label>Subtitle</label>
-<input id="whatsappSubtitle" value="Chat with us">
-
-</div>
-
-<div class="card">
-
-<h3>Phone</h3>
+<label>Phone Subtitle</label>
+<input id="phoneSubtitle" value="Call our business">
 
 <label>Phone Number</label>
-<input id="phoneNumber" value="+919956464164">
+<input id="phoneNumber" placeholder="+91XXXXXXXXXX">
 
-<label>Title</label>
-<input id="phoneTitle" value="Call Now">
+<h2>Footer</h2>
 
-<label>Subtitle</label>
-<input id="phoneSubtitle" value="Contact Anantaa Creation">
+<label>Footer Business Name</label>
+<input id="footerName">
 
+<label>Business Address</label>
+<textarea id="footerAddress"></textarea>
+
+<button class="save" onclick="saveBusiness()">SAVE BUSINESS</button>
+
+<div id="status" class="status"></div>
+
+<div class="preview">
+<strong>Business Page URL:</strong>
+<div id="pageUrl">Enter Business ID</div>
 </div>
 
-<div class="card">
-
-<h3>Footer</h3>
-
-<label>Footer Name</label>
-<input id="footerName" value="Anantaa Creation">
-
-<label>Address</label>
-<textarea id="footerAddress">Parth Avenue Commercial Complex, Shop No. FF-2 & FF-3
-Opp. Savita Society, Nr. Naranpura Crossing, Ahmedabad</textarea>
-
+</div>
 </div>
 
-<div class="card">
+<script>
 
-<button onclick="loadData()">LOAD CURRENT DATA</button>
+function value(id){
+  return document.getElementById(id).value.trim();
+}
 
-<button onclick="saveData()">SAVE CHANGES</button>
+function setValue(id,val){
+  document.getElementById(id).value = val || "";
+}
 
-<p id="msg"></p>
+function updatePageUrl(){
+  const id = value("businessId");
 
-</div
+  if(id){
+    document.getElementById("pageUrl").textContent =
+      window.location.origin + "/?business=" + encodeURIComponent(id);
+  }else{
+    document.getElementById("pageUrl").textContent =
+      "Enter Business ID";
+  }
+}
+
+document.getElementById("businessId").addEventListener(
+  "input",
+  updatePageUrl
+);
+
+async function loadBusiness(){
+
+  const businessId = value("businessId");
+
+  if(!businessId){
+    alert("Please enter Business ID");
+    return;
+  }
+
+  const status = document.getElementById("status");
+  status.textContent = "Loading...";
+
+  try{
+
+    const response = await fetch(
+      "/api/config/" + encodeURIComponent(businessId),
+      {cache:"no-store"}
+    );
+
+    if(!response.ok){
+      throw new Error("Business not found");
+    }
+
+    const c = await response.json();
+
+    setValue("businessId",c.businessId || businessId);
+    setValue("siteName",c.siteName);
+    setValue("eyebrow",c.eyebrow);
+    setValue("subtitle",c.subtitle);
+
+    setValue("logo",c.logo && c.logo.url);
+
+    setValue("reviewTitle",c.review && c.review.title);
+    setValue("reviewSubtitle",c.review && c.review.subtitle);
+    setValue("reviewUrl",c.review && c.review.url);
+
+    setValue("instagramTitle",c.instagram && c.instagram.title);
+    setValue("instagramSubtitle",c.instagram && c.instagram.subtitle);
+    setValue("instagramUrl",c.instagram && c.instagram.url);
+
+    setValue("facebookTitle",c.facebook && c.facebook.title);
+    setValue("facebookSubtitle",c.facebook && c.facebook.subtitle);
+    setValue("facebookUrl",c.facebook && c.facebook.url);
+
+    setValue("paymentTitle",c.payment && c.payment.title);
+    setValue("paymentSubtitle",c.payment && c.payment.subtitle);
+    setValue("upiId",c.payment && c.payment.upiId);
+
+    setValue("mapsTitle",c.maps && c.maps.title);
+    setValue("mapsSubtitle",c.maps && c.maps.subtitle);
+    setValue("mapsUrl",c.maps && c.maps.url);
+
+    setValue("whatsappTitle",c.whatsapp && c.whatsapp.title);
+    setValue("whatsappSubtitle",c.whatsapp && c.whatsapp.subtitle);
+    setValue("whatsappUrl",c.whatsapp && c.whatsapp.url);
+
+    setValue("phoneTitle",c.phone && c.phone.title);
+    setValue("phoneSubtitle",c.phone && c.phone.subtitle);
+    setValue("phoneNumber",c.phone && c.phone.number);
+
+    setValue("footerName",c.footer && c.footer.name);
+    setValue("footerAddress",c.footer && c.footer.address);
+
+    updatePageUrl();
+
+    status.textContent = "Business loaded ✓";
+
+  }catch(error){
+
+    console.error(error);
+    status.textContent = "Business not found.";
+  }
+}
+
+async function saveBusiness(){
+
+  const businessId = value("businessId");
+  const password = value("password");
+
+  if(!businessId){
+    alert("Please enter Business ID");
+    return;
+  }
+
+  if(!password){
+    alert("Please enter Admin Password");
+    return;
+  }
+
+  const data = {
+
+    businessId:businessId,
+
+    siteName:value("siteName"),
+    eyebrow:value("eyebrow"),
+    subtitle:value("subtitle"),
+
+    logo:{
+      url:value("logo")
+    },
+
+    review:{
+      title:value("reviewTitle"),
+      subtitle:value("reviewSubtitle"),
+      url:value("reviewUrl")
+    },
+
+    instagram:{
+      title:value("instagramTitle"),
+      subtitle:value("instagramSubtitle"),
+      url:value("instagramUrl")
+    },
+
+    facebook:{
+      title:value("facebookTitle"),
+      subtitle:value("facebookSubtitle"),
+      url:value("facebookUrl")
+    },
+
+    payment:{
+      title:value("paymentTitle"),
+      subtitle:value("paymentSubtitle"),
+      upiId:value("upiId")
+    },
+
+    maps:{
+      title:value("mapsTitle"),
+      subtitle:value("mapsSubtitle"),
+      url:value("mapsUrl")
+    },
+
+    whatsapp:{
+      title:value("whatsappTitle"),
+      subtitle:value("whatsappSubtitle"),
+      url:value("whatsappUrl")
+    },
+
+    phone:{
+      title:value("phoneTitle"),
+      subtitle:value("phoneSubtitle"),
+      number:value("phoneNumber")
+    },
+
+    footer:{
+      name:value("footerName"),
+      address:value("footerAddress")
+    }
+  };
+
+  const status = document.getElementById("status");
+
+  status.textContent = "Saving...";
+
+  try{
+
+    const response = await fetch(
+      "/api/config/" + encodeURIComponent(businessId),
+      {
+        method:"PUT",
+
+        headers:{
+          "Content-Type":"application/json",
+          "X-Admin-Password":password
+        },
+
+        body:JSON.stringify(data)
+      }
+    );
+
+    const result = await response.json();
+
+    if(!response.ok){
+      throw new Error(result.error || "Save failed");
+    }
+
+    updatePageUrl();
+
+    status.textContent =
+      "Business saved successfully ✓";
+
+  }catch(error){
+
+    console.error(error);
+
+    status.textContent =
+      "Save failed: " + error.message;
+  }
+}
+
+updatePageUrl();
+
+</script>
+
+</body>
+</html>
