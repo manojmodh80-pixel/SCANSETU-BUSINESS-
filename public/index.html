@@ -1,24 +1,159 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ScanSetu Business</title>
+<title>Anantaa Creation</title>
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+<div id="reviewPopup" class="modal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('reviewPopup')">×</button>
+    <h2>Give Us a Google Review</h2>
+    <p>Share your genuine Anantaa experience.</p>
+    <a id="popupReviewBtn"
+       href="https://g.page/r/Ce_5OmgsbRJuEBE/review"
+       target="_blank"
+       class="primary-btn">
+      ⭐ Give Google Review
+    </a>
+  </div>
+</div>
+
 <main class="wrap">
-  <header>
-    <div class="brand">SCANSETU</div>
-    <div class="tag">ONE SCAN. EVERYTHING CONNECTED.</div>
-  </header>
-  <section class="hero">
-    <h1 id="shopName">Your Business</h1>
-    <p id="tagline">Connect with us instantly.</p>
-  </section>
-  <section id="links" class="links"></section>
-  <footer>Powered by <strong>ScanSetu Business</strong></footer>
+
+<header class="header">
+  <img src="anantaa-logo.png" class="logo" alt="Anantaa Creation">
+  <div class="eyebrow" id="eyebrow">SCAN ONCE. CONNECT WITH ANANTAA.</div>
+</header>
+
+<section class="hero">
+  <h1 id="siteName">ANANTAA CREATION</h1>
+  <p id="subtitle">Designer Sarees | Chaniya Choli | Indo-Western Dresses</p>
+</section>
+
+<section class="cards">
+
+<a id="reviewBtn" class="card" href="#" target="_blank">
+  <div class="icon">⭐</div>
+  <div>
+    <h3 id="reviewTitle">GIVE US A GOOGLE REVIEW</h3>
+    <p id="reviewSubtitle">Share your genuine Anantaa experience.</p>
+  </div>
+</a>
+
+<a id="instagramBtn" class="card" href="#" target="_blank">
+  <div class="icon">◎</div>
+  <div>
+    <h3 id="instagramTitle">FOLLOW US ON INSTAGRAM</h3>
+    <p id="instagramSubtitle">New arrivals • Reels • Offers</p>
+  </div>
+</a>
+
+<a id="facebookBtn" class="card" href="#" target="_blank">
+  <div class="icon">f</div>
+  <div>
+    <h3 id="facebookTitle">FOLLOW US ON FACEBOOK</h3>
+    <p id="facebookSubtitle">Stay connected with Anantaa.</p>
+  </div>
+</a>
+
+<div class="card" onclick="openModal('paymentModal')">
+  <div class="icon">₹</div>
+  <div>
+    <h3 id="paymentTitle">PAY NOW</h3>
+    <p id="paymentSubtitle">UPI payment • Kotak</p>
+  </div>
+</div>
+
+<a id="mapsBtn" class="card" href="#" target="_blank">
+  <div class="icon">📍</div>
+  <div>
+    <h3 id="mapsTitle">GET DIRECTIONS</h3>
+    <p id="mapsSubtitle">Find Anantaa Creation</p>
+  </div>
+</a>
+
+<a id="whatsappBtn" class="card" href="#" target="_blank">
+  <div class="icon">◉</div>
+  <div>
+    <h3 id="whatsappTitle">CHAT ON WHATSAPP</h3>
+    <p id="whatsappSubtitle">Enquiries & collection details</p>
+  </div>
+</a>
+
+<a id="phoneBtn" class="card" href="tel:+919956464164">
+  <div class="icon">☎</div>
+  <div>
+    <h3 id="phoneTitle">CALL NOW</h3>
+    <p id="phoneSubtitle">Connect with Anantaa Creation</p>
+  </div>
+</a>
+
+<div class="card" onclick="openModal('reviewHelper')">
+  <div class="icon">✍</div>
+  <div>
+    <h3>REVIEW HELPER</h3>
+    <p>Need help writing your review?</p>
+  </div>
+</div>
+
+</section>
+
+<footer>
+  <div id="footerName">ANANTAA CREATION</div>
+  <div id="footerAddress">
+    Parth Avenue Commercial Complex, Shop No. FF-2 & FF-3,
+    Opp. Savita Society, Nr. Naranpura Crossing, Ahmedabad
+  </div>
+</footer>
+
 </main>
+
+<div id="paymentModal" class="modal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('paymentModal')">×</button>
+    <h2>PAY NOW</h2>
+    <p>Pay securely using UPI.</p>
+    <button id="upiBtn" class="primary-btn">💳 Pay with UPI</button>
+  </div>
+</div>
+
+<div id="reviewHelper" class="modal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('reviewHelper')">×</button>
+    <h2>Review Helper</h2>
+    <p>Tell us what you genuinely liked about Anantaa Creation.</p>
+    <a id="helperReviewBtn"
+       href="https://g.page/r/Ce_5OmgsbRJuEBE/review"
+       target="_blank"
+       class="primary-btn">
+      ⭐ Write Review
+    </a>
+  </div>
+</div>
+
 <script src="script.js"></script>
+
+<script>
+function openModal(id){
+  document.getElementById(id).style.display="flex";
+}
+
+function closeModal(id){
+  document.getElementById(id).style.display="none";
+}
+
+window.addEventListener("load",function(){
+  setTimeout(function(){
+    const popup=document.getElementById("reviewPopup");
+    if(popup) popup.style.display="flex";
+  },700);
+});
+</script>
+
 </body>
 </html>
