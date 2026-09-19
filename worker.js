@@ -1,34 +1,67 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    const match = url.pathname.match(/^\/api\/config\/([^/]+)$/);
-    if (match) {
-      const slug = decodeURIComponent(match[1]);
+
+    // API: /api/config
+    if (url.pathname === "/api/config") {
       if (request.method === "GET") {
-        const saved = await env.SCANSETU_KV.get("shop:" + slug, "json");
+        const saved = await env.ANANTAA_KV.get("shop:anantaa", "json");
         if (saved) return json(saved);
-        if (slug === "demo") {
-          return json({siteName:"Anantaa Creation",tagline:"Designer Sarees | Chaniya Choli | Indo-Western Dresses",links:[
-            {title:"Google Review",url:"https://g.page/r/Ce_5OmgsbRJuEBE/review",subtitle:"Share your genuine experience"},
-            {title:"Instagram",url:"https://www.instagram.com/anantaacreation/",subtitle:"New arrivals • Reels • Offers"},
-            {title:"Facebook",url:"https://www.facebook.com/",subtitle:"Stay connected"},
-            {title:"WhatsApp",url:"https://wa.me/",subtitle:"Chat with us"},
-            {title:"Get Directions",url:"https://maps.google.com/",subtitle:"Find our store"}]});
-        }
-        return new Response("Not found",{status:404});
+
+        try {
+          const fallback = await env.ASSETS.fetch(
+            new Request(new URL("/default-data.json", request.url))
+          );
+          if (fallback.ok) return fallback;
+        } catch (e) {}
+
+        return json({
+          siteName: "Anantaa Creation"
+        });
       }
+
       if (request.method === "PUT") {
-        if (request.headers.get("X-Admin-Password") !== env.ADMIN_PASSWORD) return new Response("Unauthorized",{status:401});
+        if (
+          request.headers.get("X-Admin-Password") !==
+          env.ADMIN_PASSWORD
+        ) {
+          return new Response("Unauthorized", { status: 401 });
+        }
+
         const data = await request.json();
-        await env.SCANSETU_KV.put("shop:" + slug, JSON.stringify(data));
-        return json({ok:true});
+
+        await env.ANANTAA_KV.put(
+          "shop:anantaa",
+          JSON.stringify(data)
+        );
+
+        return json({ ok: true });
       }
     }
-    if (url.pathname.startsWith("/r/")) {
-      url.pathname="/index.html";
+
+    // Dashboard
+    if (url.pathname === "/dashboard") {
+      url.pathname = "/dashboard.html";
       return env.ASSETS.fetch(new Request(url, request));
     }
+
+    // Website root
+    if (url.pathname === "/") {
+      url.pathname = "/index.html";
+      return env.ASSETS.fetch(new Request(url, request));
+    }
+
+    // All other static files
     return env.ASSETS.fetch(request);
   }
 };
-function json(data,status=200){return new Response(JSON.stringify(data),{status,headers:{"content-type":"application/json; charset=utf-8"}})}
+
+function json(data, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      "Content-Type": "application/json",
+      "Cache-Control": "no-store"
+    }
+  });
+}
